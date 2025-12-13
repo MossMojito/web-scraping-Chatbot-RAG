@@ -16,8 +16,9 @@ llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, api_key=OPENAI_API_KEY)
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small", api_key=OPENAI_API_KEY)
 
 # Load FAISS vectorstore
+vectorstore_path = os.path.join(os.path.dirname(__file__), "yellowpages_vectorstore")
 vectorstore = FAISS.load_local(
-    "yellowpages_vectorstore",
+    vectorstore_path,
     embeddings,
     allow_dangerous_deserialization=True
 )
