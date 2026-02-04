@@ -8,7 +8,7 @@ The project follows a modern **RAG (Retrieval-Augmented Generation)** architectu
 
 ```mermaid
 graph TD
-    subgraph Data Pipeline [Ep 1: Data Ingestion]
+    subgraph DataPipeline [Ep 1: Data Ingestion]
         Scraper["🕷️ Scraper\n(Python 3.11 + Playwright)"] -->|Extracts| CSV["Raw Data\n(.csv)"]
         CSV -->|Processed by| Embedder["🧠 Embedding Model"]
         Embedder -->|Indexed into| FAISS[("🗄️ Vector Database\nFAISS/Chroma")]
@@ -23,7 +23,7 @@ graph TD
 
     classDef pipeline fill:#f9f,stroke:#333,stroke-width:2px;
     classDef app fill:#bbf,stroke:#333,stroke-width:2px;
-    class Data Pipeline pipeline;
+    class DataPipeline pipeline;
     class Application app;
 ```
 
