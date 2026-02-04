@@ -1,6 +1,49 @@
-# Yellow Pages Sports Chatbot API
+# Web Scraping Chatbot RAG
 
 Professional modular Flask API for the Sports Chatbot.
+
+## 🏗️ System Architecture
+
+The project follows a modern **RAG (Retrieval-Augmented Generation)** architecture, split into three main pipelines:
+
+```mermaid
+graph TD
+    subgraph Data Pipeline [Ep 1: Data Ingestion]
+        Scraper[🕷️ Scraper\n(Python 3.11 + Playwright)] -->|Extracts| CSV[Raw Data\n(.csv)]
+        CSV -->|Processed by| Embedder[🧠 Embedding Model]
+        Embedder -->|Indexed into| FAISS[(🗄️ Vector Database\nFAISS/Chroma)]
+    end
+
+    subgraph Application [Ep 2: RAG Application]
+        User((👤 User)) <-->|Stunning UI| Frontend[💻 Frontend\n(React + Vite)]
+        Frontend <-->|API Request| Backend[⚙️ Backend API\n(Flask + LangChain)]
+        Backend <-->|Retrieve Context| FAISS
+        Backend <-->|Generate Answer| LLM[🤖 AI Model\n(GPT-4o)]
+    end
+
+    classDef pipeline fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef app fill:#bbf,stroke:#333,stroke-width:2px;
+    class Data Pipeline pipeline;
+    class Application app;
+```
+
+### 1. Data Pipeline (Scraper)
+-   **Engine**: Custom Python 3.11 script using `crawl4ai` (Playwright).
+-   **Function**: Crawls YellowPages Thailand to extract business names, addresses, and details.
+-   **Output**: Structured `.csv` files ready for embedding.
+
+### 2. The Brain (Backend)
+-   **Core**: Flask API serving as the orchestrator.
+-   **Intelligence**: LangChain manages the RAG flow.
+    -   **Router**: Decides if a user query is about "Sports", "Business Search", or "Chitchat".
+    -   **Retrieval**: Searches the FAISS vector database for relevant businesses.
+    -   **Synthesis**: Uses GPT-4o to generate a polite, human-like answer.
+
+### 3. The Face (Frontend)
+-   **Framework**: React + Vite (Fast & Modern).
+-   **UI Library**: Tailwind CSS + Shadcn/UI for a premium, responsive look.
+-   **Interaction**: Connects to the Backend via REST API.
+
 
 ## 🚀 Deployment
 

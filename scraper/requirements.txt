@@ -1,6 +1,7 @@
-crawl4ai
+crawl4ai==0.4.247
 openai
 pandas
 requests
 beautifulsoup4
 lxml
+openpyxl
