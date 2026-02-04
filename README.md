@@ -89,7 +89,7 @@ The frontend is located in the `frontend/` directory.
     ```bash
     npm run dev
     ```
-    The app will open at `http://localhost:8080` (or similar).
+    The app will open at `http://localhost:3000` (or similar).
 
 ## 🚀 Deployment
 
