@@ -9,16 +9,16 @@ The project follows a modern **RAG (Retrieval-Augmented Generation)** architectu
 ```mermaid
 graph TD
     subgraph Data Pipeline [Ep 1: Data Ingestion]
-        Scraper[🕷️ Scraper\n(Python 3.11 + Playwright)] -->|Extracts| CSV[Raw Data\n(.csv)]
-        CSV -->|Processed by| Embedder[🧠 Embedding Model]
-        Embedder -->|Indexed into| FAISS[(🗄️ Vector Database\nFAISS/Chroma)]
+        Scraper["🕷️ Scraper\n(Python 3.11 + Playwright)"] -->|Extracts| CSV["Raw Data\n(.csv)"]
+        CSV -->|Processed by| Embedder["🧠 Embedding Model"]
+        Embedder -->|Indexed into| FAISS[("🗄️ Vector Database\nFAISS/Chroma")]
     end
 
     subgraph Application [Ep 2: RAG Application]
-        User((👤 User)) <-->|Stunning UI| Frontend[💻 Frontend\n(React + Vite)]
-        Frontend <-->|API Request| Backend[⚙️ Backend API\n(Flask + LangChain)]
+        User(("👤 User")) <-->|Stunning UI| Frontend["💻 Frontend\n(React + Vite)"]
+        Frontend <-->|API Request| Backend["⚙️ Backend API\n(Flask + LangChain)"]
         Backend <-->|Retrieve Context| FAISS
-        Backend <-->|Generate Answer| LLM[🤖 AI Model\n(GPT-4o)]
+        Backend <-->|Generate Answer| LLM["🤖 AI Model\n(GPT-4o)"]
     end
 
     classDef pipeline fill:#f9f,stroke:#333,stroke-width:2px;
