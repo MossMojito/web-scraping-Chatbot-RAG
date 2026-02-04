@@ -39,6 +39,7 @@ Render offers a generous free tier for web services.
 ├── data/
 │   ├── raw/                 # Original Excel data
 │   └── vectorstore/         # FAISS Vector Index
+├── frontend/                # React/Lovable Frontend Application
 ├── run.py                   # Application Entry Point
 ├── Procfile                 # Deployment Config
 └── requirements.txt         # Dependencies
