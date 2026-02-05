@@ -1,73 +1,230 @@
-# Welcome to your Lovable project
+# Frontend - RAG Chatbot
 
-## Project info
+React + TypeScript frontend for the YellowPages RAG Chatbot, built with Lovable.dev.
 
-**URL**: https://chat-thai-sport.lovable.app
+## 🎨 Tech Stack
 
-## How can I edit this code?
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Tailwind CSS** - Utility-first styling
+- **Shadcn/UI** - Component library (Radix UI primitives)
+- **TanStack Query** - Server state management
+- **Lucide React** - Icon library
+- **React Router** - Navigation
 
-There are several ways of editing your application.
+## 🚀 Quick Start
 
-**Use Lovable**
+### Prerequisites
+- Node.js 18+ or Bun
+- Backend API running (see main README)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+### Installation
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+# Install dependencies
+npm install
+# or
+bun install
 ```
 
-**Edit a file directly in GitHub**
+### Development
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+# Start dev server
+npm run dev
+# or
+bun dev
+```
 
-**Use GitHub Codespaces**
+The app will open at `http://localhost:5173` (or similar).
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Build for Production
 
-## What technologies are used for this project?
+```bash
+# Create optimized build
+npm run build
+# or
+bun run build
 
-This project is built with:
+# Preview production build
+npm run preview
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## 🔧 Configuration
 
-## How can I deploy this project?
+### API Endpoint
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+The backend API URL is configured in the application. To change it for local development:
 
-## Can I connect a custom domain to my Lovable project?
+1. Find the API configuration (usually in `src/lib/api.ts` or similar)
+2. Update the base URL:
 
-Yes, you can!
+```typescript
+// For local development
+const API_URL = 'http://localhost:5000'
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+// For production
+const API_URL = 'https://your-backend.onrender.com'
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 📁 Project Structure
+
+```
+frontend/
+├── src/
+│   ├── components/        # Reusable UI components
+│   │   └── ui/           # Shadcn/UI components
+│   ├── lib/              # Utilities and helpers
+│   ├── hooks/            # Custom React hooks
+│   ├── pages/            # Page components
+│   └── App.tsx           # Main app component
+├── public/               # Static assets
+├── index.html           # Entry HTML
+├── package.json         # Dependencies
+├── tsconfig.json        # TypeScript config
+├── tailwind.config.ts   # Tailwind CSS config
+└── vite.config.ts       # Vite config
+```
+
+## 🎨 Styling
+
+This project uses **Tailwind CSS** with **Shadcn/UI** components.
+
+### Tailwind Classes
+Utility classes are used throughout the project:
+```tsx
+<div className="flex items-center gap-4 p-6">
+  <Button className="bg-primary text-white">
+    Click me
+  </Button>
+</div>
+```
+
+### Shadcn/UI Components
+Pre-built, accessible components from Radix UI:
+```tsx
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+```
+
+## 🔌 API Integration
+
+The frontend communicates with the Flask backend via REST API:
+
+### Chat Endpoint
+```typescript
+POST /chat
+{
+  "message": "Find yoga studios in Bangkok"
+}
+
+Response:
+{
+  "response": "Here are some yoga studios...",
+  "sources": [...]
+}
+```
+
+### Using TanStack Query
+```typescript
+const { data, isLoading } = useQuery({
+  queryKey: ['chat', message],
+  queryFn: () => sendMessage(message)
+})
+```
+
+## 🚢 Deployment
+
+### Lovable (Current)
+This frontend is deployed on Lovable.dev with one-click deployment.
+
+### Alternative: Vercel
+```bash
+npm run build
+vercel --prod
+```
+
+### Alternative: Netlify
+```bash
+npm run build
+netlify deploy --prod --dir=dist
+```
+
+## 🛠️ Development Tools
+
+### ESLint
+Linting is configured with TypeScript rules:
+```bash
+npm run lint
+```
+
+### TypeScript
+Type checking:
+```bash
+npx tsc --noEmit
+```
+
+## 🎯 Key Features
+
+- ✨ **Real-time Chat** - Smooth message sending and receiving
+- 💬 **Message History** - Maintains conversation context
+- 📱 **Responsive Design** - Mobile-first approach
+- 🎨 **Modern UI** - Clean, professional interface
+- ⚡ **Fast Loading** - Optimized with Vite
+- ♿ **Accessible** - Shadcn/UI components follow WCAG standards
+
+## 🧩 Components
+
+### Main Components
+
+**ChatInterface** - The main chat UI  
+**MessageBubble** - Individual message display  
+**InputArea** - Message input with send button  
+**Header** - App header with title  
+
+### UI Components (Shadcn)
+
+All available in `src/components/ui/`:
+- Button, Input, Card, Dialog
+- Scroll Area, Separator, Toast
+- And many more...
+
+## 🔧 Environment Variables
+
+Create a `.env` file if needed:
+
+```env
+VITE_API_URL=http://localhost:5000
+```
+
+Access in code:
+```typescript
+const apiUrl = import.meta.env.VITE_API_URL
+```
+
+## 📚 Additional Resources
+
+- [React Documentation](https://react.dev)
+- [Vite Documentation](https://vitejs.dev)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Shadcn/UI](https://ui.shadcn.com)
+- [TanStack Query](https://tanstack.com/query)
+
+## 🤝 Contributing
+
+This frontend was generated by Lovable.dev. For modifications:
+1. Make changes locally
+2. Test thoroughly
+3. Push to Git (triggers auto-deploy on Lovable)
+
+## 📝 Notes
+
+- This app was built using Lovable.dev, an AI-powered frontend generator
+- The component library is Shadcn/UI, which uses Radix UI primitives
+- Hot reload is enabled in development mode
+- Production builds are optimized and minified
+
+---
+
+**For full project documentation, see the main README in the root directory.**
